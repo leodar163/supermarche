@@ -19,6 +19,7 @@ public class Rayon
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "numSecteur", nullable = false)
+    @JsonIgnore
     private Secteur secteur;
 
     @OneToMany(mappedBy = "rayon")
