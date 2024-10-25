@@ -11,12 +11,12 @@ public class Travailler
     private TravaillerId id;
 
     @MapsId("idEmploye")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "codeE", nullable = false)
     private Employe employe;
 
     @MapsId("idRayon")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "codeR", nullable = false)
     private Rayon rayon;
 
