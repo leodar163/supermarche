@@ -67,5 +67,40 @@ const rayonComponent = (rayon) => {
 }
 
 const employesPage = async (rayonId) => {
-    console.log(rayonId);
+    const rayonEmployeResponse = await fetch(`/employes/rayon/${rayonId}`);
+    const rayonEmployes = await rayonEmployeResponse.json();
+
+    const employeAllReponse  = await fetch(`/employes/all`);
+    const employes = await employeAllReponse.json();
+
+    const rayonResponse = await fetch(`/rayon/${rayonId}`);
+    const rayon = await rayonResponse.json();
+
+    const employesWrapper = document.getElementById("employesWrapper");
+    const rayonEmployesWrapper = document.getElementById("rayonEmployesWrapper");
+
+    employesWrapper.innerHTML = employesList(employes, `Tous les employés`);
+    rayonEmployesWrapper.innerHTML = employesList(rayonEmployes, `employés du rayon ${rayon.nom}`);
+}
+
+const employesList = (employes, title) => {
+
+    let employeList = `
+        <h2>${title}</h2>
+        <div class="employeList">
+    `;
+
+    employeList += employes.map(employe => {
+        return employeComponent(employe);
+    }).join('\n');
+
+    employeList += `</div>`;
+
+    return employeList;
+}
+
+const employeComponent = (employe) => {
+    return `
+        <div class="employeName">${employe.prenom}</div>
+    `;
 }
