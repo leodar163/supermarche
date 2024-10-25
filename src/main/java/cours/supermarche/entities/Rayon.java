@@ -1,5 +1,6 @@
-﻿package cours.supermarche.entities;
+package cours.supermarche.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
@@ -20,7 +21,8 @@ public class Rayon
     @JoinColumn(name = "numSecteur", nullable = false)
     private Secteur secteur;
 
-    @OneToMany(mappedBy = "codeR")
+    @OneToMany(mappedBy = "rayon")
+    @JsonIgnore
     private Set<Travailler> shifts = new LinkedHashSet<>();
 
     public Integer getId()

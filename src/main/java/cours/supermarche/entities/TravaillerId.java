@@ -1,4 +1,4 @@
-﻿package cours.supermarche.entities;
+package cours.supermarche.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
