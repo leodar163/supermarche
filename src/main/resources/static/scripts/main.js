@@ -30,11 +30,42 @@ const secteurList = (secteurs) => {
 const secteurComponent = (secteur) => {
     return `
         <div class="secteurContainer">
-            <button class="secteurSelector" onclick="ouvrirRayon(${secteur.id})">${secteur.nom}</button>
+            <button class="secteurSelector" onclick="rayonsPage(${secteur.id})">${secteur.nom}</button>
         </div>
     `;
 }
 
-const ouvrirRayon = (idSecteur) => {
-    console.log(idSecteur);
+const rayonsPage = async (secteurid) => {
+    const RayonResponse = await fetch(`/rayons/secteur/${secteurid}`);
+    const rayons = await RayonResponse.json();
+    const secteurResponse = await fetch(`/secteur/${secteurid}`);
+    const secteur = await secteurResponse.json();
+
+    const rayonWrapper = document.getElementById("rayonsWrapper");
+
+    let rayonList = `
+        <h2>Rayons du secteur ${secteur.nom}</h2>
+        <div class="rayonList">
+    `;
+
+    rayonList += rayonsList(rayons);
+    rayonList += `</div>`;
+
+    rayonWrapper.innerHTML = rayonList;
+}
+
+const rayonsList = (rayons) => {
+    return rayons.map(rayon => {
+        return rayonComponent(rayon)
+    }).join('\n');
+}
+
+const rayonComponent = (rayon) => {
+    return `
+        <button class="rayonSelector" onclick="employesPage(${rayon.id})">${rayon.nom}</button>
+    `;
+}
+
+const employesPage = async (rayonId) => {
+    console.log(rayonId);
 }

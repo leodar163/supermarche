@@ -23,7 +23,7 @@ public class SecteurController
         return secteurService.getAllSecteurs();
     }
 
-    @GetMapping("/secteurs/{secteurid}")
+    @GetMapping("/secteur/{secteurid}")
     @ResponseBody
     public Secteur getSecteurById(@PathVariable int secteurid)
     {
